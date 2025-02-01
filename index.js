@@ -37,7 +37,7 @@ bot.on('message', async (msg) => {
 
   // Call the backend to generate the login page link
   try {
-    const response = await axios.post('http://your-render-url/convert-link', {
+    const response = await axios.post('https://telegram-bot-backend-3589.onrender.com', {
       link,
       telegramId: chatId
     });
